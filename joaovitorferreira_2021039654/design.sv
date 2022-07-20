@@ -28,103 +28,112 @@ module fsm(A, B, C, CLK, RST, LED);
         STATE <= S0;
         LED <= 1'b0;
         TRIG <= 1'b0;
+
       end else begin
         case(STATE)
           S0:
-                if(C == 1'b1 & TRIG == 1'b0)
-                  begin
-                    STATE <= S1;
-                    TRIG <= 1'b1;
-                    $display("S0");
-                  end else begin
+            if(C == 1'b1 & TRIG == 1'b0)
+              begin
+                STATE <= S1;
+                TRIG <= 1'b1;
+              end else begin
                                     //   else if(A == 1'b1 & TRIG == 1'b0 || B == 1'b1 & TRIG == 1'b0)
                                     //     begin
                                     //         STATE <= S0;
                                     //         TRIG <= 1'b1;
                                     //     end else begin
-                    if(C == 1'b0)   // || A == 1'b1 || B == 1'b1)
-                      begin
-                      	TRIG <= 1'b0;
-                      end
+                if(C == 1'b0)   // || A == 1'b1 || B == 1'b1)
+                  begin
+                    TRIG <= 1'b0;
+                  end
+
+                    $display("S0");
                     STATE <= S0;
                     LED <= 1'b0;
-                  end
-        S1:
-                if(C == 1'b1 & TRIG == 1'b0)
-                begin
-                    STATE <= S2;
-                    TRIG <= 1'b1;                  
-                  $display("S1");
-                                    //   end 
-                                    //   else if(A == 1'b1 & TRIG == 1'b0 || B == 1'b1 & TRIG == 1'b0)
-                                    //     begin
-                                    //         STATE <= S0;
-                                    //         TRIG <= 1'b1;
-                end else begin
-                    if(C == 1'b0)
-                    begin
-                        TRIG <= 1'b0;
-                    end
-                    STATE <= S1;
-                    LED <= 1'b0;
-                end                
-        S2:
-            if(B == 1'b1 & TRIG == 1'b0)
-                    begin
-                        STATE <= S3;
-                        TRIG <= 1'b1;
-                      $display("S2");
-                    end else begin
-                        if(B == 1'b0)
-                        begin
-                            TRIG <= 1'b0;
+
                         end
-                        STATE <= S2;
-                        LED <= 1'b0;
+        S1:
+            if(C == 1'b1 & TRIG == 1'b0)
+            begin
+              STATE <= S2;
+              TRIG <= 1'b1;
+                                //   end 
+                                //   else if(A == 1'b1 & TRIG == 1'b0 || B == 1'b1 & TRIG == 1'b0)
+                                //     begin
+                                //         STATE <= S0;
+                                //         TRIG <= 1'b1;
+            end else begin
+                if(C == 1'b0)
+                begin
+                    TRIG <= 1'b0;
+                end
+                  
+                  $display("S1");
+                  STATE <= S1;
+                  LED <= 1'b0;
+
+                    end                
+        S2:
+          if(B == 1'b1 & TRIG == 1'b0)
+            begin
+              STATE <= S3;
+              TRIG <= 1'b1;
+            end else begin
+                if(B == 1'b0)
+                begin
+                    TRIG <= 1'b0;
+                end
+
+                  $display("S2");
+                  STATE <= S2;
+                  LED <= 1'b0;
+
                     end  
         S3:
             if(B == 1'b1 & TRIG == 1'b0)
-                    begin
-                        STATE <= S4;
-                        TRIG <= 1'b1;
-                      $display("S3");
-                    end else begin
-                        if(B == 1'b0)
-                        begin
-                            TRIG <= 1'b0;
-                        end
-                        STATE <= S3;
-                        LED <= 1'b0;
-                    end  
+              begin
+                STATE <= S4;
+                TRIG <= 1'b1;
+              end else begin
+                if(B == 1'b0)
+                begin
+                    TRIG <= 1'b0;
+                end
+
+                  $display("S3");
+                  STATE <= S3;
+                  LED <= 1'b0;
+
+                      end  
         S4:
           if(B == 1'b1 & TRIG == 1'b0)
-                    begin
-                        STATE <= S5;
-                        TRIG <= 1'b1;
-                      $display("S4");
-                    end else begin
-                        if(B == 1'b0)
-                        begin
-                            TRIG <= 1'b0;
-                        end
-                        STATE <= S4;
-                        LED <= 1'b1;
+            begin
+              STATE <= S5;
+              TRIG <= 1'b1;
+            end else begin
+                if(B == 1'b0)
+                begin
+                    TRIG <= 1'b0;
+                end
+                  $display("S4");
+                  STATE <= S4;
+                  LED <= 1'b0;
+                
                     end  
         S5:
           if(B == 1'b1 & TRIG == 1'b0)
         begin
             STATE <= S0;
             TRIG <= 1'b1;
-          $display("S5");
         end else begin
             if(B == 1'b0)
             begin
                 TRIG <= 1'b0;
             end
-                STATE <= S3;
-                LED <= 1'b1;
-            end   
-
+          		$display("S5");
+              STATE <= S5;
+              LED <= 1'b1;
+              end   
 
         default:
         begin

@@ -18,6 +18,8 @@ module test;
 
     CLK = 0;
     C = 0;
+    A = 0;
+    B = 0;
     //$display("Initial LED: %0h", LED);
 
     toggle_clk;
@@ -53,14 +55,16 @@ module test;
     
     B = 1;
     toggle_clk;
-    //$display("FINAL LED: %0h", LED);
 
+    toggle_clk;
+    $display("FINAL LED: %0h", LED);
+    
   end
   
   task toggle_clk;
     begin
-      #20 CLK = ~CLK;
-      #20 CLK = ~CLK;
+      #100 CLK = ~CLK;
+      #100 CLK = ~CLK;
     end
   endtask
   
